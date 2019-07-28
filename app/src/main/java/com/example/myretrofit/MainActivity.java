@@ -2,6 +2,7 @@ package com.example.myretrofit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,8 +26,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final EditText editText = (EditText)findViewById(R.id.editText);
         final TextView name = (TextView)findViewById(R.id.textView);
-        final Button button = (Button)findViewById(R.id.button2);
+        final Button button = (Button)findViewById(R.id.button3);
         final ImageView imageView = (ImageView)findViewById(R.id.imageView2);
+        final TextView id  = (TextView)findViewById(R.id.textView2);
+        final Button tela2  = (Button)findViewById(R.id.button4);
+
+        tela2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendMessage();
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                       Usuario usuario = response.body();
                       Picasso.get().load(usuario.avatar_url).into(imageView);
                      name.setText(usuario.name);
+                     id.setText(String.valueOf(usuario.id));
                       //Toast.makeText(getBaseContext(),"nome do user"+ usuario.name,Toast.LENGTH_LONG).show();
                   }
 
@@ -52,5 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+    public void sendMessage(){
+        Intent intent = new Intent(this, Main2Activity.class);
+        startActivity(intent);
     }
 }
